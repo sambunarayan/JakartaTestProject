@@ -25,6 +25,7 @@ public class EJBServiceTest {
     public void testCall() throws Exception {
         System.out.println("call");
         EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
+
         EJBService instance = (EJBService)container.getContext().lookup("java:global/classes/EJBService");
         instance.call();
         container.close();
