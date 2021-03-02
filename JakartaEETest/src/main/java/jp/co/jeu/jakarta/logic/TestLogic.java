@@ -5,7 +5,10 @@
  */
 package jp.co.jeu.jakarta.logic;
 
+import java.math.BigInteger;
+import javax.ejb.EJB;
 import jp.co.jeu.jakarta.dao.TestDao;
+import jp.co.jeu.jakarta.shared.entity.Test;
 
 /**
  *
@@ -13,9 +16,13 @@ import jp.co.jeu.jakarta.dao.TestDao;
  */
 public class TestLogic {
     
-    public static void main(String[] args) {
-        TestDao dao = new TestDao();
-        dao.insertTest();
-        
+    @EJB
+    private TestDao testDao;
+    
+    public void doTest() {
+        Test test = new Test();
+        test.setName("Test1");
+        test.setAge(BigInteger.valueOf(11L));
+        testDao.insertTest(test);
     }
 }

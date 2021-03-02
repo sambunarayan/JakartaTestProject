@@ -6,27 +6,26 @@
 package jp.co.jeu.jakarta.dao;
 
 import java.math.BigInteger;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 import jp.co.jeu.jakarta.shared.entity.Test;
 
 /**
  *
  * @author soyou
  */
+@Stateless
 public class TestDao {
     
-    public void insertTest() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jp.co.jeu_JakartaEETest_war_1.0.0PU");
-        EntityManager em = emf.createEntityManager();
+    @PersistenceContext(unitName = "jp.co.jeu_JakartaEETest_war_1.0.0PU")
+    private EntityManager em;
+    
+    public void insertTest(Test test) {
+//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jp.co.jeu_JakartaEETest_war_1.0.0PU");
+//        EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
-        
-        Test test = new Test();
-        test.setName("Test1");
-        test.setAge(BigInteger.valueOf(11L));
-        
         tx.begin();
         em.persist(test);
         tx.commit();
