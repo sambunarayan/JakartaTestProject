@@ -2,3 +2,8 @@
 /EJBRemote/target/
 /EJBRemote/nbproject/
 /ResourceLocalTest/target/
+/JBatchTest/target/
+/JakartaEETest-lib/target/
+/JakartaEETest/target/
+/*/target/
+*.class
