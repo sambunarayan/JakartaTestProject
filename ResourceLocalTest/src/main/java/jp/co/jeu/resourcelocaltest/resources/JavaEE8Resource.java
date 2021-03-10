@@ -20,7 +20,8 @@ public class JavaEE8Resource {
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("jp.co.jeu_ResourceLocalTest_war_1.0.0PU");
         EntityManager em = emf.createEntityManager();
-
+        em.getTransaction().begin();
+        System.out.println(" hai !!! ");
         Query query = em.createNativeQuery("SELECT * FROM TEST");
         query.getResultList().stream().forEach(o -> {
             Object[] objs = (Object[]) o;

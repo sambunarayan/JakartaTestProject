@@ -7,7 +7,7 @@
     </properties>
 
     <step id="first-step">
-        <chunk item-count="5">
+        <chunk item-count="1">
             <reader    ref="myItemReader"/>
             <processor ref="myItemProcessor"/>
             <writer    ref="myItemWriter"/>
