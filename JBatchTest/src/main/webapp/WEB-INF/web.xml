@@ -8,4 +8,11 @@
             30
         </session-timeout>
     </session-config>
+    <context-param>
+    	<param-name>SYSTEM_FILE_PATH</param-name>
+    	<param-value>/META-INF/settings.xml</param-value>
+    </context-param>
+    <listener>
+    	<listener-class>jp.co.jeu.jbatch.BatchAppListener</listener-class>
+    </listener>
 </web-app>

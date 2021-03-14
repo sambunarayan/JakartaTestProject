@@ -10,14 +10,20 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author soyou
  */
+@XmlRootElement(name = "batch-settings")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Settings {
 
+    @XmlElement(name = "description")
+    private String description;
+
+    @XmlElementWrapper(name = "settings")
     @XmlElement(name = "setting")
     private List<Setting> settingList;
 
@@ -35,5 +41,19 @@ public class Settings {
      */
     public void setSettingList(List<Setting> settingList) {
         this.settingList = settingList;
+    }
+
+    /**
+     * @return the description
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * @param description the description to set
+     */
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
