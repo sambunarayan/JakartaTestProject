@@ -6,6 +6,8 @@
     <class>jp.co.jeu.jbatch.entity.JbatchTest</class>
     <properties>
         <property name="com.acme.persistence.sql-logging" value="on"/>
+        <property name="eclipselink.logging.level.sql" value="FINE"/>
+        <property name="eclipselink.logging.parameters" value="true"/>
     </properties>
   </persistence-unit>
 </persistence>
