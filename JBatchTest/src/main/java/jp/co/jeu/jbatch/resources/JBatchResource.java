@@ -12,6 +12,8 @@ import javax.ws.rs.core.Response;
 import jp.co.jeu.jbatch.annotation.TraceLogger;
 import jp.co.jeu.jbatch.beans.MyInterface;
 import jp.co.jeu.jbatch.system.SystemSettingsManager;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -20,6 +22,8 @@ import jp.co.jeu.jbatch.system.SystemSettingsManager;
 @Path("/batch-start")
 @TraceLogger
 public class JBatchResource {
+
+    private static final Logger logger = LogManager.getLogger(JBatchResource.class.getSimpleName());
 
     @Inject
     private MyInterface myInter;
@@ -32,7 +36,7 @@ public class JBatchResource {
         // Xml
 //        XmlReader xmlReader =  new XmlReader();
 
-        System.out.println(SystemSettingsManager.get("URL"));
+        logger.info(SystemSettingsManager.get("URL"));
 
         // ジョブの起動
         JobOperator jobOperator = BatchRuntime.getJobOperator();
@@ -49,7 +53,7 @@ public class JBatchResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response testBean() {
 
-        System.out.println("MyInterface class name : " + myInter.getClass().getSimpleName());
+        logger.info("MyInterface class name : " + myInter.getClass().getSimpleName());
 
         return Response
                 .ok("ping")

@@ -16,6 +16,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 import jp.co.jeu.jbatch.entity.JbatchTest;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -25,6 +27,8 @@ import jp.co.jeu.jbatch.entity.JbatchTest;
 @Dependent
 public class MyItemWriter implements ItemWriter {
 
+    private static final Logger logger = LogManager.getLogger(MyItemWriter.class.getSimpleName());
+
     @Inject
     private JobContext jobContext;
 
@@ -33,12 +37,12 @@ public class MyItemWriter implements ItemWriter {
 
     @Override
     public void open(Serializable checkpoint) throws Exception {
-        System.out.println("ItemWriter open.");
+        logger.info("ItemWriter open.");
     }
 
     @Override
     public void close() throws Exception {
-        System.out.println("ItemWriter close.");
+        logger.info("ItemWriter close.");
     }
 
     @Override
@@ -48,7 +52,7 @@ public class MyItemWriter implements ItemWriter {
         query.setParameter("id", 9999);
         JbatchTest jbatch = (JbatchTest) query.getSingleResult();
 
-        System.out.println("ItemWriter writeItem : " + items);
+//        System.out.println("ItemWriter writeItem : " + items);
 //        items.forEach(item -> em.persist(item));
         try {
 //            update(items.get(0));
@@ -64,7 +68,7 @@ public class MyItemWriter implements ItemWriter {
 
     @Override
     public Serializable checkpointInfo() throws Exception {
-        System.out.println("ItemWriter checkpoint.");
+        logger.info("ItemWriter checkpoint.");
         return null;
     }
 

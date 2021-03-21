@@ -10,6 +10,8 @@ import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 import jp.co.jeu.jbatch.annotation.TraceLogger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -19,16 +21,23 @@ import jp.co.jeu.jbatch.annotation.TraceLogger;
 @Priority(Interceptor.Priority.APPLICATION)
 @TraceLogger
 public class TraceLoggerInterceptor {
-    
+
+    private static final Logger logger = LogManager.getLogger(TraceLoggerInterceptor.class.getSimpleName());
+
     @AroundInvoke
     public Object trace(InvocationContext ic) throws Exception {
-        System.out.println(":::::: Trace Start ::::::");
-        System.out.println("Target --> " + ic.getTarget());
-        System.out.println("Target method --> " + ic.getMethod());
-        System.out.println("Target Param --> " + ic.getParameters());
-        System.out.println("Target Timer --> " + ic.getTimer());
-        Object result = ic.proceed();
-        System.out.println(":::::: Trace End ::::::");
-        return result;
+        logger.info(":::::: Trace Start ::::::");
+        logger.debug("Target --> " + ic.getTarget());
+        logger.debug("Target method --> " + ic.getMethod());
+        logger.debug("Target Param --> " + ic.getParameters());
+        logger.debug("Target Timer --> " + ic.getTimer());
+        Object res = null;
+        try {
+            res = ic.proceed();
+        } catch (Exception e) {
+            logger.error(e);
+        }
+        logger.info(":::::: Trace End ::::::");
+        return res;
     }
 }
