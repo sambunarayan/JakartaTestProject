@@ -11,6 +11,8 @@ import javax.batch.api.chunk.ItemProcessor;
 import javax.enterprise.context.Dependent;
 import javax.inject.Named;
 import jp.co.jeu.jbatch.entity.JbatchTest;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -19,6 +21,9 @@ import jp.co.jeu.jbatch.entity.JbatchTest;
 @Named
 @Dependent
 public class MyItemProcessor implements ItemProcessor {
+    
+    private static final Logger logger = LogManager.getLogger(MyItemProcessor.class.getSimpleName());
+    
     @PostConstruct
     public void init() {
         System.out.println("ItemProcessor init.");
@@ -27,7 +32,7 @@ public class MyItemProcessor implements ItemProcessor {
     @Override
     public Object processItem(Object item) throws Exception {
         String line = (String) item;
-        System.out.println("Processor processItem : " + line);
+        logger.info("Processor processItem : " + line);
         String[] values = line.split(",");
         String name = values[1];
         JbatchTest test = new JbatchTest(BigDecimal.valueOf(Integer.parseInt(values[0])), name);

@@ -2,7 +2,7 @@
 <Configuration status="INFO">
     <properties>
         <property name="baseUrl">../logs/JBatchTest/</property>
-        <property name="layoutPattern">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</property>
+        <property name="layoutPattern">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - ${sys:serviceName} %msg%n</property>
     </properties>
     <!-- ログの出力先と出力フォーマットを指定する -->
     <Appenders>
@@ -56,9 +56,6 @@
             <level value="debug">
                 <AppenderRef ref="debug-appender"/>
             </level>
-        </logger>
-        <logger name="org.eclipse.persistence" level="INFO">
-            <AppenderRef ref="info-appender"/>
         </logger>
         <Root level="trace">
             <AppenderRef ref="console-appender"/>
