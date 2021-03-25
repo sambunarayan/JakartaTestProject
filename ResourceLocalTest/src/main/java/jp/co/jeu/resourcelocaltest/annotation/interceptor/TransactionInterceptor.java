@@ -6,8 +6,10 @@
 package jp.co.jeu.resourcelocaltest.annotation.interceptor;
 
 import javax.annotation.Priority;
+import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
+import javax.persistence.EntityManager;
 import jp.co.jeu.resourcelocaltest.annotation.LocalTransactionScoped;
 
 /**
@@ -18,6 +20,9 @@ import jp.co.jeu.resourcelocaltest.annotation.LocalTransactionScoped;
 @Priority(Interceptor.Priority.APPLICATION)
 @LocalTransactionScoped
 public class TransactionInterceptor {
+
+    @Inject
+    private EntityManager em;
 
     @AroundInvoke
     public void transactionMange() {
