@@ -11,6 +11,7 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 import jp.co.jeu.jbatch.entity.JbatchTest;
 import org.apache.logging.log4j.LogManager;
@@ -41,5 +42,11 @@ public class TransactionTestLogic {
         if (testEntity.getId() == BigDecimal.valueOf(3)) {
             throw new RuntimeException();
         }
+    }
+
+    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+    @Transactional(rollbackOn = RuntimeException.class)
+    public void update(int id) {
+        Query query = em.createQuery("");
     }
 }
