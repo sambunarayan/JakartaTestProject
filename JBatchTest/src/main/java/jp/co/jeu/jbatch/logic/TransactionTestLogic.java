@@ -46,7 +46,9 @@ public class TransactionTestLogic {
 
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     @Transactional(rollbackOn = RuntimeException.class)
-    public void update(int id) {
-        Query query = em.createQuery("");
+    public int update(int id) {
+        Query query = em.createNamedQuery("JbatchTest.updateByKey");
+        query.setParameter("id", id);
+        return query.executeUpdate();
     }
 }

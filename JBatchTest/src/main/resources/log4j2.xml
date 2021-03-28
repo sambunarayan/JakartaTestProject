@@ -6,9 +6,7 @@
     </properties>
     <!-- ログの出力先と出力フォーマットを指定する -->
     <Appenders>
-        <Console name="console-appender" target="SYSTEM_OUT">
-            <PatternLayout pattern="${layoutPattern}"/>
-        </Console>
+        <Console name="console-appender" target="SYSTEM_OUT"/>
  
         <RollingFile name="info-appender"
                      fileName="${baseUrl}/info.log"

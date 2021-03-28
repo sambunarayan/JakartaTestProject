@@ -4,10 +4,12 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm
                             http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd">
-  <named-query name="JbatchTest.findAll">
+  <named-query name="JbatchTest.updateByKey">
     <query><![CDATA[
-     SELECT j
-       FROM JbatchTest j
+     UPDATE JbatchTest j
+     SET
+        j.name = 'ABC 213'
+     WHERE j.id = :id
     ]]></query>
   </named-query>
 </entity-mappings>

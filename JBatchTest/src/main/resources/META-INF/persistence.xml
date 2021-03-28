@@ -4,6 +4,7 @@
   <persistence-unit name="testPU" transaction-type="JTA">
     <jta-data-source>payara_test_db</jta-data-source>
     <class>jp.co.jeu.jbatch.entity.JbatchTest</class>
+    <mapping-file>META-INF/orm.xml</mapping-file>
     <properties>
       <!-- <property name="com.acme.persistence.sql-logging" value="on"/> -->
       <property name="eclipselink.logging.level.sql" value="FINE"/>
