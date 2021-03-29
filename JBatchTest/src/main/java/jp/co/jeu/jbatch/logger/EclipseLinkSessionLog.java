@@ -5,6 +5,7 @@
  */
 package jp.co.jeu.jbatch.logger;
 
+import java.util.Arrays;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.persistence.internal.databaseaccess.Accessor;
@@ -34,6 +35,7 @@ public class EclipseLinkSessionLog extends AbstractSessionLog {
                 : ("." + categoryName));
         Logger log = LogManager.getLogger(EclipseLinkSessionLog.class.getSimpleName());
 
+        log.info(" ::::::::::::: logName --> " + logName);
         switch (logLevel) {
             case SessionLog.OFF:
                 break;
@@ -71,6 +73,10 @@ public class EclipseLinkSessionLog extends AbstractSessionLog {
                     log.trace(computeMessage(logEntry), ex);
                 }
                 break;
+        }
+        Object[] objs = logEntry.getParameters();
+        if (objs != null) {
+            Arrays.asList(objs).forEach(o -> log.info("  param -> " + o));
         }
     }
 
