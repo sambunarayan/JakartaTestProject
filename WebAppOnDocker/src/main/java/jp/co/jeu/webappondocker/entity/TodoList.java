@@ -29,29 +29,27 @@ import javax.validation.constraints.Size;
 @Table(name = "TODO_LIST")
 @NamedQueries({
     @NamedQuery(name = "TodoList.findAll", query = "SELECT t FROM TodoList t"),
-    @NamedQuery(name = "TodoList.findByTodoName", query = "SELECT t FROM TodoList t WHERE t.todoName = :todoName"),
-    @NamedQuery(name = "TodoList.findByStatus", query = "SELECT t FROM TodoList t WHERE t.status = :status"),
-    @NamedQuery(name = "TodoList.findByTodoDate", query = "SELECT t FROM TodoList t WHERE t.todoDate = :todoDate"),
-    @NamedQuery(name = "TodoList.findByTodoListId", query = "SELECT t FROM TodoList t WHERE t.todoListId = :todoListId")})
+    @NamedQuery(name = "TodoList.findByTodoListId", query = "SELECT t FROM TodoList t WHERE t.todoListId = :todoListId"),
+    @NamedQuery(name = "TodoList.findByColumn2", query = "SELECT t FROM TodoList t WHERE t.column2 = :column2"),
+    @NamedQuery(name = "TodoList.findByColumn3", query = "SELECT t FROM TodoList t WHERE t.column3 = :column3"),
+    @NamedQuery(name = "TodoList.findByTodoLimit", query = "SELECT t FROM TodoList t WHERE t.todoLimit = :todoLimit")})
 public class TodoList implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 60)
-    @Column(name = "TODO_NAME")
-    private String todoName;
-    @Column(name = "STATUS")
-    private BigInteger status;
-    @Column(name = "TODO_DATE")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date todoDate;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "TODO_LIST_ID")
     private BigDecimal todoListId;
+    @Size(max = 60)
+    @Column(name = "COLUMN2")
+    private String column2;
+    @Column(name = "COLUMN3")
+    private BigInteger column3;
+    @Column(name = "TODO_LIMIT")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date todoLimit;
 
     public TodoList() {
     }
@@ -60,41 +58,36 @@ public class TodoList implements Serializable {
         this.todoListId = todoListId;
     }
 
-    public TodoList(BigDecimal todoListId, String todoName) {
-        this.todoListId = todoListId;
-        this.todoName = todoName;
-    }
-
-    public String getTodoName() {
-        return todoName;
-    }
-
-    public void setTodoName(String todoName) {
-        this.todoName = todoName;
-    }
-
-    public BigInteger getStatus() {
-        return status;
-    }
-
-    public void setStatus(BigInteger status) {
-        this.status = status;
-    }
-
-    public Date getTodoDate() {
-        return todoDate;
-    }
-
-    public void setTodoDate(Date todoDate) {
-        this.todoDate = todoDate;
-    }
-
     public BigDecimal getTodoListId() {
         return todoListId;
     }
 
     public void setTodoListId(BigDecimal todoListId) {
         this.todoListId = todoListId;
+    }
+
+    public String getColumn2() {
+        return column2;
+    }
+
+    public void setColumn2(String column2) {
+        this.column2 = column2;
+    }
+
+    public BigInteger getColumn3() {
+        return column3;
+    }
+
+    public void setColumn3(BigInteger column3) {
+        this.column3 = column3;
+    }
+
+    public Date getTodoLimit() {
+        return todoLimit;
+    }
+
+    public void setTodoLimit(Date todoLimit) {
+        this.todoLimit = todoLimit;
     }
 
     @Override
