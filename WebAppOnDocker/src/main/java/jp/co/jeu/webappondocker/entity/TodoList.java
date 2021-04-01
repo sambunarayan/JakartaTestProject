@@ -30,8 +30,8 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "TodoList.findAll", query = "SELECT t FROM TodoList t"),
     @NamedQuery(name = "TodoList.findByTodoListId", query = "SELECT t FROM TodoList t WHERE t.todoListId = :todoListId"),
-    @NamedQuery(name = "TodoList.findByColumn2", query = "SELECT t FROM TodoList t WHERE t.column2 = :column2"),
-    @NamedQuery(name = "TodoList.findByColumn3", query = "SELECT t FROM TodoList t WHERE t.column3 = :column3"),
+    @NamedQuery(name = "TodoList.findByTodoName", query = "SELECT t FROM TodoList t WHERE t.todoName = :todoName"),
+    @NamedQuery(name = "TodoList.findByTodoStatus", query = "SELECT t FROM TodoList t WHERE t.todoStatus = :todoStatus"),
     @NamedQuery(name = "TodoList.findByTodoLimit", query = "SELECT t FROM TodoList t WHERE t.todoLimit = :todoLimit")})
 public class TodoList implements Serializable {
 
@@ -43,10 +43,10 @@ public class TodoList implements Serializable {
     @Column(name = "TODO_LIST_ID")
     private BigDecimal todoListId;
     @Size(max = 60)
-    @Column(name = "COLUMN2")
-    private String column2;
-    @Column(name = "COLUMN3")
-    private BigInteger column3;
+    @Column(name = "TODO_NAME")
+    private String todoName;
+    @Column(name = "TODO_STATUS")
+    private BigInteger todoStatus;
     @Column(name = "TODO_LIMIT")
     @Temporal(TemporalType.TIMESTAMP)
     private Date todoLimit;
@@ -66,20 +66,20 @@ public class TodoList implements Serializable {
         this.todoListId = todoListId;
     }
 
-    public String getColumn2() {
-        return column2;
+    public String getTodoName() {
+        return todoName;
     }
 
-    public void setColumn2(String column2) {
-        this.column2 = column2;
+    public void setTodoName(String todoName) {
+        this.todoName = todoName;
     }
 
-    public BigInteger getColumn3() {
-        return column3;
+    public BigInteger getTodoStatus() {
+        return todoStatus;
     }
 
-    public void setColumn3(BigInteger column3) {
-        this.column3 = column3;
+    public void setTodoStatus(BigInteger todoStatus) {
+        this.todoStatus = todoStatus;
     }
 
     public Date getTodoLimit() {
