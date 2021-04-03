@@ -22,6 +22,7 @@ public class TodoResource {
 
     @GET
     public Response ping() {
+        
         return Response
                 .ok("ping")
                 .build();
