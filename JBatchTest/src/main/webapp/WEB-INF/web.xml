@@ -12,6 +12,14 @@
     	<param-name>SYSTEM_FILE_PATH</param-name>
     	<param-value>/META-INF/settings.xml</param-value>
     </context-param>
+    <filter>
+        <filter-name>servletLogFilter</filter-name>
+        <filter-class>jp.co.jeu.jbatch.ServletLogFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>servletLogFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     <listener>
     	<listener-class>jp.co.jeu.jbatch.BatchAppListener</listener-class>
     </listener>
