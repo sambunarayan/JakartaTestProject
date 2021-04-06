@@ -14,6 +14,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <jakartaee>8.0</jakartaee>
+        <jeus-group-id>jp.co.jeu</jeus-group-id>
+        <jeus-group-version>1.0.0</jeus-group-version>
     </properties>
     
     <dependencies>
@@ -71,6 +73,11 @@
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-jcl</artifactId>
             <version>2.13.3</version>
+        </dependency>
+        <dependency>
+            <groupId>${jeus-group-id}</groupId>
+            <artifactId>jeus-common-lib</artifactId>
+            <version>${jeus-group-version}</version>
         </dependency>
     </dependencies>
     

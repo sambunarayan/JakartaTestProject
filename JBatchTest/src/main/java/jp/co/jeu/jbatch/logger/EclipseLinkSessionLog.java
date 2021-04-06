@@ -31,6 +31,10 @@ public class EclipseLinkSessionLog extends AbstractSessionLog {
         String categoryName = logEntry.getNameSpace();
         Throwable ex = logEntry.getException();
 
+        if (!categoryName.equals("sql")) {
+            return;
+        }
+
         String logName = ECLIPSELINK_NAMESPACE + (categoryName == null ? ""
                 : ("." + categoryName));
         Logger log = LogManager.getLogger(EclipseLinkSessionLog.class.getSimpleName());
