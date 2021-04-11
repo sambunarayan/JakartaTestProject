@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<batch-settings>
+    <description>batch system settings</description>
+    <settings>
+        <setting>
+            <key>URL</key>
+            <value>http://localhost/stub/</value>
+        </setting>
+        <setting>
+            <key>TIMEOUT</key>
+            <value>5</value>
+        </setting>
+    </settings>
+</batch-settings>
