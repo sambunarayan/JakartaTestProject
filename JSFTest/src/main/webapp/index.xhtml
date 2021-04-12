@@ -8,9 +8,8 @@
     <h:body>  
         <h:form>  
             <h:outputLabel for="username">User Name</h:outputLabel>  
-            <h:inputText id="username" value="#{user.name}" required="true" requiredMessage="User Name is required" /><br/> 
-            <h:inputText id="adress" value="#{user.addr}" required="true" requiredMessage="Addr is required" /><br/> 
-            <h:commandButton id="submit-button" value="Submit" action="response.xhtml"/>  
+            <h:inputText id="username" value="#{todoController.user.name}" required="true" requiredMessage="User Name is required" /><br/> 
+            <h:commandButton id="submit-button" value="Submit" action="#{todoController.findTodoList}"/>  
         </h:form>  
     </h:body>  
 </html>
