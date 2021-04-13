@@ -27,14 +27,11 @@ public class TodoController {
     private User user = new User();
     private List<TodoList> todoList = new ArrayList<>();
 
-//    @PersistenceContext(name = "jp.co.jeu_JSFTest_war_1.0.0PU")
-//    private EntityManager em;
-
     public String findTodoList() {
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("jp.co.jeu_JSFTest_war_1.0.0PU");
         EntityManager em = emf.createEntityManager();
-        
+
         Query query = em.createNamedQuery("TodoList.findByUserName");
         query.setParameter("userName", user.getName());
 
