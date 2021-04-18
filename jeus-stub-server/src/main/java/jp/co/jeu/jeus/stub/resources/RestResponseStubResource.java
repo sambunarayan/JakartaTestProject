@@ -5,6 +5,7 @@
  */
 package jp.co.jeu.jeus.stub.resources;
 
+import java.util.Map;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -26,11 +27,25 @@ public class RestResponseStubResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response doResponse(String reqData) {
-        ResponseDatas response = ResponseXmlReader.get("D:\\Temp\\ResponseData.xml");
-        System.out.println(response.getDescription());
-        System.out.println(response.getData());
+        Map<String, String> response = ResponseXmlReader.get("D:\\Temp\\ResponseData.xml");
+        System.out.println(response.get("description"));
+        System.out.println(response);
         return Response
                 .ok()
                 .build();
+    }
+
+    @GET
+    @Path("delay")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response doDelay() {
+        Map<String, String> delayConfig = ResponseXmlReader.getFromResouce("/DelayConfig.xml");
+        try {
+            Thread.sleep(Long.parseLong(delayConfig.get("sleep")));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return Response.ok().build();
     }
 }

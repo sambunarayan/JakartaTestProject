@@ -14,6 +14,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <jakartaee>8.0</jakartaee>
+        <jeu-group>jp.co.jeu</jeu-group>
+        <jeu-version>1.0.0</jeu-version>
     </properties>
     
     <dependencies>
@@ -38,6 +40,11 @@
             <artifactId>jaxb-impl</artifactId>
             <version>2.4.0-b180830.0438</version>
         </dependency>
+        <dependency>
+            <groupId>${jeu-group}</groupId>
+            <artifactId>jeus-common-lib</artifactId>
+            <version>${jeu-version}</version>
+        </dependency>  
     </dependencies>
     
     <build>

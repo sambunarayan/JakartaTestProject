@@ -24,7 +24,9 @@ public class TimeoutResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response process() {
-
+        
+//        CompletableFuture.supplyAsync()
+        
         return Response.ok()
                 .build();
     }
