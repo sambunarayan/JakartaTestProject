@@ -13,7 +13,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import jp.co.jeu.jeus.stub.tool.ResponseXmlReader;
-import jp.co.jeu.jeus.stub.xml.ResponseDatas;
 
 /**
  *

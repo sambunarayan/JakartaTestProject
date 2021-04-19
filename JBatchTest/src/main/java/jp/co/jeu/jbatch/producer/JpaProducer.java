@@ -7,6 +7,7 @@ package jp.co.jeu.jbatch.producer;
 
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Produces;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -15,6 +16,7 @@ import javax.persistence.PersistenceContext;
  * @author soyou
  */
 @Dependent
+@Named
 public class JpaProducer {
 
     @PersistenceContext(unitName = "testPU")

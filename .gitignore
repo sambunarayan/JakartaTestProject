@@ -7,3 +7,4 @@
 /JakartaEETest/target/
 /*/target/
 *.class
+*.war

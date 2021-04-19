@@ -26,7 +26,7 @@ public class TimeoutResource {
     public Response process() {
         
 //        CompletableFuture.supplyAsync()
-        
+
         return Response.ok()
                 .build();
     }

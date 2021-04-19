@@ -25,19 +25,23 @@ public class EclipseLinkSessionLog extends AbstractSessionLog {
      */
     public static final String ECLIPSELINK_NAMESPACE = "org.eclipse.persistence";
 
+    Logger log = LogManager.getLogger(EclipseLinkSessionLog.class.getSimpleName());
+
     @Override
     public void log(SessionLogEntry logEntry) {
         int logLevel = logEntry.getLevel();
         String categoryName = logEntry.getNameSpace();
         Throwable ex = logEntry.getException();
-
+        if (ex != null) {
+            log.info("session log -> {}", ex);
+            return;
+        }
         if (!categoryName.equals("sql")) {
             return;
         }
 
         String logName = ECLIPSELINK_NAMESPACE + (categoryName == null ? ""
                 : ("." + categoryName));
-        Logger log = LogManager.getLogger(EclipseLinkSessionLog.class.getSimpleName());
 
         log.info(" ::::::::::::: logName --> " + logName);
         switch (logLevel) {
