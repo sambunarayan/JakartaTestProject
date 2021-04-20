@@ -5,7 +5,9 @@
  */
 package jp.co.jeu.common.lib.rest;
 
-import jakarta.ws.rs.client.WebTarget;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  *
@@ -14,4 +16,13 @@ import jakarta.ws.rs.client.WebTarget;
 public abstract class AbstractClient {
 
     protected abstract WebTarget getWebTarget();
+
+    public int get(String path) {
+        Response response = getWebTarget()
+                .path(path)
+                .request()
+                .accept(MediaType.APPLICATION_JSON)
+                .get();
+        return response.getStatus();
+    }
 }

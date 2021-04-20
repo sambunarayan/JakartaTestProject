@@ -3,11 +3,15 @@
     <description>batch system settings</description>
     <settings>
         <setting>
-            <key>URL</key>
-            <value>http://localhost/stub/</value>
+            <key>STUB_URL</key>
+            <value>http://localhost:8080/stub/</value>
         </setting>
         <setting>
-            <key>TIMEOUT</key>
+            <key>REST_CONNECT_TIMEOUT</key>
+            <value>5</value>
+        </setting>
+        <setting>
+            <key>REST_READ_TIMEOUT</key>
             <value>5</value>
         </setting>
     </settings>
