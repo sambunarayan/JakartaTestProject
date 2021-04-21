@@ -6,6 +6,8 @@
 package jp.co.jeu.jbatch.rest;
 
 import java.util.concurrent.TimeUnit;
+import javax.enterprise.context.Dependent;
+import javax.inject.Named;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
@@ -17,6 +19,8 @@ import jp.co.jeu.jbatch.system.SystemSettingsManager;
  *
  * @author soyou
  */
+@Dependent
+@Named
 public class StubRestClient extends AbstractClient {
 
     private WebTarget webTarget;

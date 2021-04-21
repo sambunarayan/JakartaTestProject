@@ -6,7 +6,6 @@
 package jp.co.jeu.jbatch.logic;
 
 import javax.enterprise.context.Dependent;
-import jp.co.jeu.jbatch.rest.StubRestClient;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -20,13 +19,14 @@ public class TimeoutTestLogic {
     private static final String path = "/rest/delay";
 
     private Logger logger = LogManager.getLogger(TimeoutTestLogic.class.getSimpleName());
-    private StubRestClient stubClient = new StubRestClient();
+//    @Inject
+//    private StubRestClient stubClient;
 
     public int exec() {
         logger.info(":::::::: Request delay to Stub Server");
-        int status = stubClient.get(path);
-        logger.info(":::::::: HTTP Status {}", status);
-        return status;
+//        int status = stubClient.get(path);
+//        logger.info(":::::::: HTTP Status {}", status);
+        return 0;
     }
 
 }

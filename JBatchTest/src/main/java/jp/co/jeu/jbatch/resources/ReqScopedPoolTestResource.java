@@ -18,7 +18,7 @@ import jp.co.jeu.jbatch.beans.DependentTestBean;
 import jp.co.jeu.jbatch.beans.SessionTestBean;
 import jp.co.jeu.jbatch.beans.StatefulTestBean;
 import jp.co.jeu.jbatch.beans.StatelessTestBean;
-import jp.co.jeu.jbatch.logic.TransactionTestLogic;
+import jp.co.jeu.jbatch.logic.EJBTransactionTestLogic;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -33,7 +33,7 @@ public class ReqScopedPoolTestResource {
     private static final Logger logger = LogManager.getLogger(JBatchResource.class.getSimpleName());
 
     @Inject
-    private TransactionTestLogic txLogic;
+    private EJBTransactionTestLogic txLogic;
     @Inject
     private DependentTestBean depTestBean;
     @Inject
