@@ -35,7 +35,7 @@ public class RestResponseStubResource {
     }
 
     @GET
-    @Path("delay")
+    @Path("/delay")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response doDelay() {

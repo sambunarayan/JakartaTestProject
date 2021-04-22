@@ -4,15 +4,15 @@
     <settings>
         <setting>
             <key>STUB_URL</key>
-            <value>http://localhost:8080/stub/</value>
+            <value>http://localhost:8080/jeus-stub-server/stub</value>
         </setting>
         <setting>
             <key>REST_CONNECT_TIMEOUT</key>
-            <value>5</value>
+            <value>15000</value>
         </setting>
         <setting>
             <key>REST_READ_TIMEOUT</key>
-            <value>5</value>
+            <value>15000</value>
         </setting>
     </settings>
 </batch-settings>

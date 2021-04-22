@@ -19,6 +19,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import jp.co.jeu.jbatch.logic.TimeoutTestLogic;
+import org.apache.logging.log4j.LogManager;
 
 /**
  *
@@ -28,6 +29,7 @@ import jp.co.jeu.jbatch.logic.TimeoutTestLogic;
 @RequestScoped
 public class TimeoutResource {
 
+    private org.apache.logging.log4j.Logger logger = LogManager.getLogger(TimeoutResource.class.getSimpleName());
     @Inject
     private TimeoutTestLogic logic;
 
@@ -43,7 +45,9 @@ public class TimeoutResource {
         } catch (ExecutionException ex) {
             Logger.getLogger(TimeoutResource.class.getName()).log(Level.SEVERE, null, ex);
         } catch (TimeoutException ex) {
-            Logger.getLogger(TimeoutResource.class.getName()).log(Level.SEVERE, null, ex);
+            logger.error(" ********* TimeoutException *********");
+            return Response.serverError()
+                    .build();
         }
 
         return Response.ok()
