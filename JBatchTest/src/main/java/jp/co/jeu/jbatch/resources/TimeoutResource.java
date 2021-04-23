@@ -49,7 +49,6 @@ public class TimeoutResource {
             return Response.serverError()
                     .build();
         }
-
         return Response.ok()
                 .build();
     }
