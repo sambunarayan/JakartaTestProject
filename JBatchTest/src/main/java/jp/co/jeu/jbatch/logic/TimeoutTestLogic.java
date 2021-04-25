@@ -22,7 +22,7 @@ import org.apache.logging.log4j.Logger;
 @Dependent
 public class TimeoutTestLogic {
     
-    private static final String path = "/rest/delay";
+    private static final String path = "/rest/delay?env=local";
     
     private Logger logger = LogManager.getLogger(TimeoutTestLogic.class.getSimpleName());
     @Inject

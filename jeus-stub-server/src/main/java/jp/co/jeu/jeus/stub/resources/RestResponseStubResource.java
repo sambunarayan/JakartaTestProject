@@ -10,6 +10,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import jp.co.jeu.jeus.stub.tool.ResponseXmlReader;
@@ -38,8 +39,16 @@ public class RestResponseStubResource {
     @Path("/delay")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response doDelay() {
-        Map<String, String> delayConfig = ResponseXmlReader.getFromResouce("/DelayConfig.xml");
+    public Response doDelay(@QueryParam("env") String env) {
+        Map<String, String> delayConfig = null; 
+        switch (env) {
+            case "local":
+                delayConfig = ResponseXmlReader.getFromResouce("/DelayConfig.xml");
+                break;
+            case "docker":
+                delayConfig = ResponseXmlReader.get("/opt/payara/data/DelayConfig.xml");
+                break;
+        }
         try {
             Thread.sleep(Long.parseLong(delayConfig.get("sleep")));
         } catch (InterruptedException e) {
