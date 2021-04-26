@@ -39,7 +39,6 @@ public class JBatchResource {
     public Response ping() {
         // Xml
 //        XmlReader xmlReader =  new XmlReader();
-
         logger.info(SystemSettingsManager.get("URL"));
         System.setProperty("serviceName", "JBatchTest");
         // ジョブの起動
