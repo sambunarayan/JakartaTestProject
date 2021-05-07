@@ -16,6 +16,35 @@
         <jakartaee>8.0</jakartaee>
     </properties>
     
+    <profiles>
+        <profile>
+            <id>integration</id> <!-- for docker -->
+            <build>
+                <resources>
+                    <resource> <!-- 先に記述した設定が優先(最後に上書き)される。 -->
+                        <directory>src/main/resources.integretion</directory>
+                    </resource>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+        <profile>
+            <id>production</id>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources.production</directory>
+                    </resource>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+    </profiles>
+    
     <dependencies>
         <dependency>
             <groupId>javax</groupId>
@@ -23,9 +52,12 @@
             <version>${jakartaee}</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            
+        </dependency>
     </dependencies>
     
-     <build>
+    <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
