@@ -5,7 +5,7 @@
     <artifactId>HouseholdExpenses</artifactId>
     <version>1.0.0</version>
     <packaging>war</packaging>
-    <name>HouseholdExpenses-1.0.0</name>
+    <name>HouseholdExpenses</name>
     
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -14,6 +14,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <jakartaee>8.0</jakartaee>
+        <jeus-group-id>jp.co.jeus</jeus-group-id>
+        <jeus-version>1.0.0</jeus-version>
     </properties>
     
     <profiles>
@@ -21,7 +23,7 @@
             <id>integration</id> <!-- for docker -->
             <build>
                 <resources>
-                    <resource> <!-- å…ˆã«è¨˜è¿°ã—ãŸè¨­å®šãŒå„ªå…ˆ(æœ€å¾Œã«ä¸Šæ›¸ã)ã•ã‚Œã‚‹ã€‚ -->
+                    <resource> <!-- æ‚É‹Lq‚µ‚½Ý’è‚ª—Dæ(ÅŒã‚Éã‘‚«)‚³‚ê‚éB -->
                         <directory>src/main/resources.integretion</directory>
                     </resource>
                     <resource>
@@ -53,7 +55,9 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            
+            <groupId>${jeus-group-id}</groupId>
+            <artifactId>jeus-common-lib</artifactId>
+            <version>${jeus-version}</version>
         </dependency>
     </dependencies>
     
