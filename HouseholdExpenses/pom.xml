@@ -23,7 +23,7 @@
             <id>integration</id> <!-- for docker -->
             <build>
                 <resources>
-                    <resource> <!-- æ‚É‹Lq‚µ‚½Ý’è‚ª—Dæ(ÅŒã‚Éã‘‚«)‚³‚ê‚éB -->
+                    <resource> <!-- This line takes precedence -->
                         <directory>src/main/resources.integretion</directory>
                     </resource>
                     <resource>
