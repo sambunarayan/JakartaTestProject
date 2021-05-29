@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.jeu.jeus.stub.resources;
+package jp.co.jeus.stub.resources;
 
 import java.time.LocalDateTime;
 import java.util.concurrent.TimeUnit;

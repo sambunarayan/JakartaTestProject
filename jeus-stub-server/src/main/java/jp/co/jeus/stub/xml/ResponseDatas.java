@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.jeu.jeus.stub.xml;
+package jp.co.jeus.stub.xml;
 
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;

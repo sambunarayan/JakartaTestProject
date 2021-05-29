@@ -11,7 +11,7 @@ import javax.inject.Named;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
-import jp.co.jeu.common.lib.rest.AbstractClient;
+import jp.co.jeus.common.lib.rest.AbstractClient;
 import jp.co.jeu.jbatch.constant.RestSettingKey;
 import jp.co.jeu.jbatch.system.SystemSettingsManager;
 

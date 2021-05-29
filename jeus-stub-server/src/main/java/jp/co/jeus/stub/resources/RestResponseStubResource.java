@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.jeu.jeus.stub.resources;
+package jp.co.jeus.stub.resources;
 
 import java.util.Map;
 import javax.ws.rs.Consumes;
@@ -13,7 +13,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import jp.co.jeu.jeus.stub.tool.ResponseXmlReader;
+import jp.co.jeus.stub.tool.ResponseXmlReader;
 
 /**
  *

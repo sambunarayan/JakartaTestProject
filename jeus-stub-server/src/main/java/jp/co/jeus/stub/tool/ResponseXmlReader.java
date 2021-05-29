@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.jeu.jeus.stub.tool;
+package jp.co.jeus.stub.tool;
 
 import java.util.HashMap;
 import java.util.Map;
 import javax.xml.bind.JAXB;
-import jp.co.jeu.jeus.stub.xml.ResponseDatas;
+import jp.co.jeus.stub.xml.ResponseDatas;
 
 /**
  *

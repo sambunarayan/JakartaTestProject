@@ -1,4 +1,4 @@
-package jp.co.jeu.jeus.stub;
+package jp.co.jeus.conf;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;

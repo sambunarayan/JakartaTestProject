@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.jeu.common.lib.rest;
+package jp.co.jeus.common.lib.rest;
 
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
