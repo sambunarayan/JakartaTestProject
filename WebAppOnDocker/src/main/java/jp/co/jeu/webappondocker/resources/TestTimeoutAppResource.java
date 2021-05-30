@@ -5,6 +5,7 @@
  */
 package jp.co.jeu.webappondocker.resources;
 
+import SystemKeys;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -17,6 +18,8 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 import jp.co.jeu.webappondocker.logic.TimeoutTestLogic;
+import jp.co.jeus.common.lib.constants.SystemKeys;
+import jp.co.jeus.common.lib.system.SystemSettingsManager;
 
 /**
  *
@@ -34,7 +37,7 @@ public class TestTimeoutAppResource {
 
         CompletableFuture future = CompletableFuture.supplyAsync(() -> logic.requestToStub());
         try {
-            future.get(0, TimeUnit.SECONDS);
+            future.get(Long.parseLong(SystemSettingsManager.get(SystemKeys.RESPONSE_TIMEOUT_SECOND)), TimeUnit.SECONDS);
         } catch (InterruptedException ex) {
             Logger.getLogger(TestTimeoutAppResource.class.getName()).log(Level.SEVERE, null, ex);
             Thread.currentThread().interrupt();

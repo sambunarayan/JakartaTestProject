@@ -44,7 +44,7 @@ public class SystemSettingsManager {
         }
     }
 
-    public static String get(String key) {
-        return settingsMap.get(key);
+    public static String get(SystemKey key) {
+        return settingsMap.get(key.getKey());
     }
 }
