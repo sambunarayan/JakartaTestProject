@@ -5,7 +5,6 @@
  */
 package jp.co.jeu.webappondocker.resources;
 
-import SystemKeys;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
