@@ -6,6 +6,9 @@
 package jp.co.jeus.common.lib.timer;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -43,9 +46,31 @@ public class ResponseTimerTest {
     @Test
     public void testRegist() {
         System.out.println("regist");
-        ResponseTimer.regist(Thread.currentThread(), 10000);
-
-//        CompletableFuture exec = CompletableFuture.supplyAsync(()->test());
+        ResponseTimer.regist(Thread.currentThread());
+        try {
+            System.out.println("start Thread id : " + Thread.currentThread().getId());
+            System.out.println(ResponseTimer.getStartedTime(Thread.currentThread()));
+            TimeUnit.SECONDS.sleep(1);
+            CompletableFuture f = CompletableFuture.supplyAsync(() -> {
+                System.out.println("start Thread id : " + Thread.currentThread().getId());
+                System.out.println(ResponseTimer.getStartedTime(Thread.currentThread()));
+                return false;
+            });
+            try {
+                System.out.println("start Thread id : " + Thread.currentThread().getId());
+                System.out.println(ResponseTimer.getStartedTime(Thread.currentThread()));
+                f.get(2, TimeUnit.SECONDS);
+            } catch (ExecutionException | TimeoutException e) {
+                e.printStackTrace();
+                Thread.currentThread().interrupt();
+                System.out.println("start Thread id : " + Thread.currentThread().getId());
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(ResponseTimer.getStartedTime(Thread.currentThread()));
+        System.out.println(ResponseTimer.getStartedTime(Thread.currentThread()));
+        System.out.println(ResponseTimer.getPassedTime(Thread.currentThread()));
     }
 
     private void test() {

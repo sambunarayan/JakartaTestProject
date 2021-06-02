@@ -5,8 +5,8 @@
  */
 package jp.co.jeus.common.lib.timer;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  *
@@ -14,17 +14,25 @@ import java.util.Map;
  */
 public final class ResponseTimer {
 
-    private static Map<Long, Long> timeoutMap = new HashMap<>();
+    private static ConcurrentMap<Long, Long> timeoutMap = new ConcurrentHashMap<>();
 
     private ResponseTimer() {
 
     }
 
-    public static void regist(Thread t, long timeout) {
-        timeoutMap.put(t.getId(), timeout);
+    public static void regist(Thread t) {
+        timeoutMap.put(t.getId(), System.currentTimeMillis());
     }
 
     public static void remove(Thread t) {
         timeoutMap.remove(t.getId());
+    }
+
+    public static long getStartedTime(Thread t) {
+        return timeoutMap.get(t.getId());
+    }
+
+    public static long getPassedTime(Thread t) {
+        return System.currentTimeMillis() - timeoutMap.get(t.getId());
     }
 }
