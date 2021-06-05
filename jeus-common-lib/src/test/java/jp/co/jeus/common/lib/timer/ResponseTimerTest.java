@@ -50,7 +50,18 @@ public class ResponseTimerTest {
         try {
             System.out.println("start Thread id : " + Thread.currentThread().getId());
             System.out.println(ResponseTimer.getStartedTime(Thread.currentThread()));
+            new Thread(() -> {
+                System.out.println("Runnable Thread id : " + Thread.currentThread().getId());
+                try {
+                    TimeUnit.SECONDS.sleep(2);
+                } catch (InterruptedException e) {
+                }
+//                ResponseTimer.registForThreadMap(Thread.currentThread());
+//                ResponseTimer.showMap();
+            }).start();
+            System.out.println("After Runnable Thread id : " + Thread.currentThread().getId());
             TimeUnit.SECONDS.sleep(1);
+            ResponseTimer.showMap();
             CompletableFuture f = CompletableFuture.supplyAsync(() -> {
                 System.out.println("start Thread id : " + Thread.currentThread().getId());
                 System.out.println(ResponseTimer.getStartedTime(Thread.currentThread()));

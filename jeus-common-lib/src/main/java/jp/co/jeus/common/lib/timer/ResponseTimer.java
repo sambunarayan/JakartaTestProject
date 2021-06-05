@@ -15,13 +15,13 @@ import java.util.concurrent.ConcurrentMap;
 public final class ResponseTimer {
 
     private static ConcurrentMap<Long, Long> timeoutMap = new ConcurrentHashMap<>();
-    
+
     private static ConcurrentMap<Thread, Long> timeoutMapForThread = new ConcurrentHashMap<>();
 
     private ResponseTimer() {
 
     }
-    
+
     public static void registForThreadMap(Thread t) {
         timeoutMapForThread.put(t, System.currentTimeMillis());
     }
@@ -40,5 +40,9 @@ public final class ResponseTimer {
 
     public static long getPassedTime(Thread t) {
         return System.currentTimeMillis() - timeoutMap.get(t.getId());
+    }
+
+    public static void showMap() {
+        System.out.println(timeoutMapForThread);
     }
 }
