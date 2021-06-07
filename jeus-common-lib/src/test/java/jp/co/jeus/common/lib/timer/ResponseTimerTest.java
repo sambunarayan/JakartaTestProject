@@ -9,6 +9,10 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import jp.co.jeus.common.lib.constants.SystemKeys;
+import jp.co.jeus.common.lib.system.SystemSettingsManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -46,7 +50,7 @@ public class ResponseTimerTest {
     @Test
     public void testRegist() {
         System.out.println("regist");
-        ResponseTimer.regist(Thread.currentThread());
+        ResponseTimer.regist(Thread.currentThread(), 10000L);
         try {
             System.out.println("start Thread id : " + Thread.currentThread().getId());
             System.out.println(ResponseTimer.getStartedTime(Thread.currentThread()));
@@ -81,7 +85,32 @@ public class ResponseTimerTest {
         }
         System.out.println(ResponseTimer.getStartedTime(Thread.currentThread()));
         System.out.println(ResponseTimer.getStartedTime(Thread.currentThread()));
-        System.out.println(ResponseTimer.getPassedTime(Thread.currentThread()));
+        System.out.println(ResponseTimer.getRemaingTime(Thread.currentThread()));
+        System.out.println(ResponseTimer.getRemaingTime(Thread.currentThread()));
+    }
+
+    @Test
+    public void testRegist2() {
+        ResponseTimer.regist(Thread.currentThread(), 10000L);
+        System.out.println(Thread.currentThread().getId() + " -> " + ResponseTimer.getRemaingTime(Thread.currentThread()));
+        CompletableFuture future = CompletableFuture.supplyAsync(() -> {
+            System.out.println("Future was started");
+            System.out.println(Thread.currentThread().getId() + " -> " + ResponseTimer.getRemaingTime(Thread.currentThread()));
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ResponseTimerTest.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return true;
+        });
+        try {
+            future.get(10000L, TimeUnit.SECONDS);
+            System.out.println(Thread.currentThread().getId() + " -> " + ResponseTimer.getRemaingTime(Thread.currentThread()));
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        } catch (ExecutionException ex) {
+        } catch (TimeoutException ex) {
+        }
     }
 
     private void test() {

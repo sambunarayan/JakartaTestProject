@@ -19,6 +19,7 @@ import javax.ws.rs.core.Response;
 import jp.co.jeu.webappondocker.logic.TimeoutTestLogic;
 import jp.co.jeus.common.lib.constants.SystemKeys;
 import jp.co.jeus.common.lib.system.SystemSettingsManager;
+import jp.co.jeus.common.lib.timer.ResponseTimer;
 
 /**
  *
@@ -33,8 +34,10 @@ public class TestTimeoutAppResource {
 
     @GET
     public Response doTest() {
-
-        CompletableFuture future = CompletableFuture.supplyAsync(() -> logic.requestToStub());
+        ResponseTimer.regist(Thread.currentThread(), Long.parseLong(SystemSettingsManager.get(SystemKeys.RESPONSE_TIMEOUT_SECOND)));
+        CompletableFuture future = CompletableFuture.supplyAsync(() -> {
+            return logic.requestToStub();
+        });
         try {
             future.get(Long.parseLong(SystemSettingsManager.get(SystemKeys.RESPONSE_TIMEOUT_SECOND)), TimeUnit.SECONDS);
         } catch (InterruptedException ex) {

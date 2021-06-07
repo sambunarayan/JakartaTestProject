@@ -5,6 +5,7 @@
  */
 package jp.co.jeus.common.lib.timer;
 
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -14,7 +15,12 @@ import java.util.concurrent.ConcurrentMap;
  */
 public final class ResponseTimer {
 
-    private static ConcurrentMap<Long, Long> timeoutMap = new ConcurrentHashMap<>();
+    private enum Keys {
+        START_TIME,
+        TIMEOUT_MILISECONDS;
+    }
+
+    private static ConcurrentMap<Long, Map<Keys, Long>> timeoutMap = new ConcurrentHashMap<>();
 
     private static ConcurrentMap<Thread, Long> timeoutMapForThread = new ConcurrentHashMap<>();
 
@@ -26,8 +32,8 @@ public final class ResponseTimer {
         timeoutMapForThread.put(t, System.currentTimeMillis());
     }
 
-    public static void regist(Thread t) {
-        timeoutMap.put(t.getId(), System.currentTimeMillis());
+    public static void regist(Thread t, Long timeout) {
+        timeoutMap.put(t.getId(), Map.of(Keys.START_TIME, System.currentTimeMillis(), Keys.TIMEOUT_MILISECONDS, timeout));
     }
 
     public static void remove(Thread t) {
@@ -35,11 +41,13 @@ public final class ResponseTimer {
     }
 
     public static long getStartedTime(Thread t) {
-        return timeoutMap.get(t.getId());
+        return timeoutMap.get(t.getId()).get(Keys.START_TIME);
     }
 
-    public static long getPassedTime(Thread t) {
-        return System.currentTimeMillis() - timeoutMap.get(t.getId());
+    public static long getRemaingTime(Thread t) {
+        return timeoutMap.get(t.getId()).get(Keys.TIMEOUT_MILISECONDS)
+                - (System.currentTimeMillis() - timeoutMap.get(t.getId()).get(Keys.START_TIME));
+
     }
 
     public static void showMap() {
