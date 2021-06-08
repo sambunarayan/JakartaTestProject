@@ -16,6 +16,7 @@ import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
+import jp.co.jeu.webappondocker.constants.ProcStatus;
 import jp.co.jeu.webappondocker.logic.TimeoutTestLogic;
 import jp.co.jeus.common.lib.constants.SystemKeys;
 import jp.co.jeus.common.lib.system.SystemSettingsManager;
@@ -34,12 +35,28 @@ public class TestTimeoutAppResource {
 
     @GET
     public Response doTest() {
-        ResponseTimer.regist(Thread.currentThread(), Long.parseLong(SystemSettingsManager.get(SystemKeys.RESPONSE_TIMEOUT_SECOND)));
+        final long tId = Thread.currentThread().getId();
+        ResponseTimer.regist(Thread.currentThread(), Long.parseLong(SystemSettingsManager.get(SystemKeys.RESPONSE_TIMEOUT_MILLISECOND)));
         CompletableFuture future = CompletableFuture.supplyAsync(() -> {
-            return logic.requestToStub();
+            ResponseTimer.regist(Thread.currentThread(), ResponseTimer.getRemaingTime(tId));
+            ProcStatus result = null;
+            try {
+                System.out.println(" :::::::: before requestToStub ---> " + ResponseTimer.getRemaingTime(Thread.currentThread()));
+                Thread.sleep(15000);
+                result = logic.requestToStub();
+            } catch (InterruptedException e) {
+                System.out.println("InterruptedException occured in requestToStub");
+//                Thread.currentThread().interrupt();
+            } finally {
+                ResponseTimer.remove(Thread.currentThread());
+            }
+            return result;
         });
         try {
-            future.get(Long.parseLong(SystemSettingsManager.get(SystemKeys.RESPONSE_TIMEOUT_SECOND)), TimeUnit.SECONDS);
+            System.out.println("Wailt Future " + Thread.currentThread().getId());
+            future.get(Long.parseLong(SystemSettingsManager.get(SystemKeys.RESPONSE_TIMEOUT_MILLISECOND)), TimeUnit.MILLISECONDS);
+            System.out.println("Release Future " + Thread.currentThread().getId());
+            ResponseTimer.showMap();
         } catch (InterruptedException ex) {
             Logger.getLogger(TestTimeoutAppResource.class.getName()).log(Level.SEVERE, null, ex);
             Thread.currentThread().interrupt();

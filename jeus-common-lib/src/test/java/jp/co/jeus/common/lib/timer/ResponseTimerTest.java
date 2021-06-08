@@ -97,15 +97,17 @@ public class ResponseTimerTest {
             System.out.println("Future was started");
             System.out.println(Thread.currentThread().getId() + " -> " + ResponseTimer.getRemaingTime(Thread.currentThread()));
             try {
-                TimeUnit.SECONDS.sleep(1);
+                TimeUnit.SECONDS.sleep(9);
             } catch (InterruptedException ex) {
                 Logger.getLogger(ResponseTimerTest.class.getName()).log(Level.SEVERE, null, ex);
             }
             return true;
         });
         try {
-            future.get(10000L, TimeUnit.SECONDS);
-            System.out.println(Thread.currentThread().getId() + " -> " + ResponseTimer.getRemaingTime(Thread.currentThread()));
+            System.out.println(future.get(10L, TimeUnit.SECONDS));
+            System.out.println("After " + Thread.currentThread().getId() + " -> " + ResponseTimer.getRemaingTime(Thread.currentThread()));
+            
+            TimeUnit.SECONDS.sleep(11);
         } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
         } catch (ExecutionException ex) {

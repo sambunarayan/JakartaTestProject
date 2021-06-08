@@ -23,10 +23,10 @@ public class SystemSettingsManager {
     public static void load() {
         SystemSettings settings = JAXB.unmarshal(SystemSettings.class.getResourceAsStream("/META-INF/SystemSettings.xml"), SystemSettings.class);
 
-        if (environment != null && environment != settings.getEnvironment()) {
+        if (environment != null && environment != Environment.valueOf(settings.getEnvironment())) {
             return;
         }
-        environment = settings.getEnvironment();
+        environment = Environment.valueOf(settings.getEnvironment());
         for (Setting s : settings.getSettings()) {
             settingsMap.put(s.getKey(), s.getValue());
         }
@@ -35,10 +35,10 @@ public class SystemSettingsManager {
     public static void load(String xml) {
         SystemSettings settings = JAXB.unmarshal(SystemSettings.class.getResourceAsStream(xml), SystemSettings.class);
 
-        if (environment != null && environment != settings.getEnvironment()) {
+        if (environment != null && environment != Environment.valueOf(settings.getEnvironment())) {
             return;
         }
-        environment = settings.getEnvironment();
+        environment = Environment.valueOf(settings.getEnvironment());
         for (Setting s : settings.getSettings()) {
             settingsMap.put(s.getKey(), s.getValue());
         }

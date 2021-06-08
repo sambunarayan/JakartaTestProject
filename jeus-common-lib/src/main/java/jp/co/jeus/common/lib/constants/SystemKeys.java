@@ -1,6 +1,5 @@
 package jp.co.jeus.common.lib.constants;
 
-
 import jp.co.jeus.common.lib.system.SystemKey;
 
 /*
@@ -14,7 +13,7 @@ import jp.co.jeus.common.lib.system.SystemKey;
  */
 public enum SystemKeys implements SystemKey {
 
-    RESPONSE_TIMEOUT_SECOND;
+    RESPONSE_TIMEOUT_MILLISECOND;
 
     @Override
     public String getKey() {

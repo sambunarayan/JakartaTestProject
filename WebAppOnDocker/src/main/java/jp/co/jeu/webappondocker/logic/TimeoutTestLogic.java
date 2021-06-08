@@ -7,6 +7,7 @@ package jp.co.jeu.webappondocker.logic;
 
 import javax.enterprise.context.Dependent;
 import jp.co.jeu.webappondocker.constants.ProcStatus;
+import jp.co.jeus.common.lib.timer.ResponseTimer;
 
 /**
  *
@@ -16,7 +17,9 @@ import jp.co.jeu.webappondocker.constants.ProcStatus;
 public class TimeoutTestLogic {
 
     public ProcStatus requestToStub() {
-
+        ResponseTimer.showMap();
+        System.out.println(" :::::::: requestToStub Thread ID ---> " + Thread.currentThread().getId());
+        System.out.println(" :::::::: requestToStub remaining ---> " + ResponseTimer.getRemaingTime(Thread.currentThread()));
         return ProcStatus.OK;
     }
 }

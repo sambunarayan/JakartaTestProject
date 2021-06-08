@@ -5,6 +5,7 @@
  */
 package jp.co.jeus.common.lib.timer;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -33,7 +34,11 @@ public final class ResponseTimer {
     }
 
     public static void regist(Thread t, Long timeout) {
-        timeoutMap.put(t.getId(), Map.of(Keys.START_TIME, System.currentTimeMillis(), Keys.TIMEOUT_MILISECONDS, timeout));
+//        timeoutMap.put(t.getId(), Map.of(Keys.START_TIME, System.currentTimeMillis(), Keys.TIMEOUT_MILISECONDS, timeout));
+        Map<Keys, Long> tempMap = new HashMap<>();
+        tempMap.put(Keys.START_TIME, System.currentTimeMillis());
+        tempMap.put(Keys.TIMEOUT_MILISECONDS, timeout);
+        timeoutMap.put(t.getId(), tempMap);
     }
 
     public static void remove(Thread t) {
@@ -45,12 +50,17 @@ public final class ResponseTimer {
     }
 
     public static long getRemaingTime(Thread t) {
-        return timeoutMap.get(t.getId()).get(Keys.TIMEOUT_MILISECONDS)
-                - (System.currentTimeMillis() - timeoutMap.get(t.getId()).get(Keys.START_TIME));
+        return getRemaingTime(t.getId());
+
+    }
+
+    public static long getRemaingTime(long tId) {
+        return timeoutMap.get(tId).get(Keys.TIMEOUT_MILISECONDS)
+                - (System.currentTimeMillis() - timeoutMap.get(tId).get(Keys.START_TIME));
 
     }
 
     public static void showMap() {
-        System.out.println(timeoutMapForThread);
+        System.out.println("TimeoutMap --> " + timeoutMap);
     }
 }

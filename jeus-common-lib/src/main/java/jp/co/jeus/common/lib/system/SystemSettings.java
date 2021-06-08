@@ -11,7 +11,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-import jp.co.jeus.common.lib.constants.Environment;
 
 /**
  *
@@ -22,7 +21,7 @@ import jp.co.jeus.common.lib.constants.Environment;
 public class SystemSettings {
 
     @XmlElement(name = "environment")
-    private Environment environment;
+    private String environment;
     @XmlElement(name = "description")
     private String description;
 
@@ -32,7 +31,7 @@ public class SystemSettings {
 
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlRootElement(name = "setting")
-    public class Setting {
+    public static class Setting {
 
         @XmlElement(name = "key")
         private String key;
@@ -76,14 +75,14 @@ public class SystemSettings {
     /**
      * @return the environment
      */
-    public Environment getEnvironment() {
+    public String getEnvironment() {
         return environment;
     }
 
     /**
      * @param environment the environment to set
      */
-    public void setEnvironment(Environment environment) {
+    public void setEnvironment(String environment) {
         this.environment = environment;
     }
 
