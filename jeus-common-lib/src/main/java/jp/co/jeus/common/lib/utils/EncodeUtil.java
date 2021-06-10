@@ -5,6 +5,7 @@
  */
 package jp.co.jeus.common.lib.utils;
 
+import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import jp.co.jeus.common.lib.constants.EncodeType;
@@ -19,8 +20,8 @@ public final class EncodeUtil {
         throw new IllegalStateException();
     }
 
-    public static byte[] encode(String value, EncodeType encodeType) throws NoSuchAlgorithmException {
+    public static String encode(String value, EncodeType encodeType) throws NoSuchAlgorithmException {
         MessageDigest digest = MessageDigest.getInstance(encodeType.name());
-        return digest.digest(value.getBytes());
+        return Base64.encode(digest.digest(value.getBytes()));
     }
 }
