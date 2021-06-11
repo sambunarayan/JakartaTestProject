@@ -7,6 +7,8 @@ package jp.co.jeu.webappondocker.resources;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.logging.Level;
@@ -51,6 +53,10 @@ public class TestTimeoutAppResource {
                 ResponseTimer.remove(Thread.currentThread());
             }
             return result;
+        });
+        ExecutorService service = Executors.newCachedThreadPool();
+        service.submit(()->{
+            logic.requestToStub();
         });
         try {
             System.out.println("Wailt Future " + Thread.currentThread().getId());
