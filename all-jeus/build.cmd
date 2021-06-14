@@ -1,1 +1,3 @@
-mvn package -Dmaven.test.skip
+mvn clean package -P integration -Dmaven.test.skip 
+
+pause

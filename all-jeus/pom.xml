@@ -26,5 +26,6 @@
     <modules>
       <module>../jeus-common-lib</module>
       <module>../JBatchTest</module>
+      <module>../WebAppOnDocker</module>
     </modules>
 </project>

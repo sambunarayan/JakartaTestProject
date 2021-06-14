@@ -34,7 +34,7 @@
             <build>
                 <resources>
                     <resource> <!-- This line takes precedence -->
-                        <directory>src/main/resources.integretion</directory>
+                        <directory>src/main/resources.integration</directory>
                     </resource>
                     <resource>
                         <directory>src/main/resources</directory>
