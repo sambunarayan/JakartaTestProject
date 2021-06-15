@@ -20,7 +20,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 import jp.co.jeu.webappondocker.constants.ProcStatus;
 import jp.co.jeu.webappondocker.logic.TimeoutTestLogic;
-import jp.co.jeus.common.lib.constants.SystemKeys;
+import jp.co.jeu.webappondocker.constants.SystemKeys;
 import jp.co.jeus.common.lib.system.SystemSettingsManager;
 import jp.co.jeus.common.lib.timer.ResponseTimer;
 

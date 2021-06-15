@@ -1,4 +1,4 @@
-package jp.co.jeus.common.lib.constants;
+package jp.co.jeu.webappondocker.constants;
 
 import jp.co.jeus.common.lib.system.SystemKey;
 
@@ -13,7 +13,8 @@ import jp.co.jeus.common.lib.system.SystemKey;
  */
 public enum SystemKeys implements SystemKey {
 
-    RESPONSE_TIMEOUT_MILLISECOND;
+    RESPONSE_TIMEOUT_MILLISECOND,
+    TIMEOUT_SERVER_URL,;
 
     @Override
     public String getKey() {
