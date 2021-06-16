@@ -6,6 +6,7 @@
 package jp.co.jeu.webappondocker.logic;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 /**
  *
@@ -20,6 +21,8 @@ public class ProducerTestLogic {
     }
 
     public EntityManager getEntityManager() {
+        Query query = em.createNamedQuery("TodoList.findAll");
+        query.getResultList();
         return this.em;
     }
 }
