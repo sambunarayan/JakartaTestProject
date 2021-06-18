@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <properties>
+        <property name="baseUrl">../logs/JBatchTest/</property>
+        <property name="layoutPattern">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - ${sys:serviceName} %msg%n</property>
+    </properties>
+    <!-- ログの出力先と出力フォーマットを指定する -->
+    <Appenders>
+        <Console name="console-appender" target="SYSTEM_OUT"/>
+ 
+        <RollingFile name="info-appender"
+                     fileName="${baseUrl}/info.log"
+                     filePattern="${baseUrl}/info_%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="${layoutPattern}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="100 KB" />
+                <TimeBasedTriggeringPolicy interval="1" />
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+        <RollingFile name="debug-appender"
+                     fileName="${baseUrl}/debug.log"
+                     filePattern="${baseUrl}/debug_%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="${layoutPattern}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="100 KB" />
+                <TimeBasedTriggeringPolicy interval="1" />
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+        <RollingFile name="error-appender"
+                     fileName="${baseUrl}/error.log"
+                     filePattern="${baseUrl}/error_%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="${layoutPattern}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="100 KB" />
+                <TimeBasedTriggeringPolicy interval="1" />
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+    </Appenders>
+ 
+    <!-- パッケージごとにAppenderとログレベルを組み合わせる -->
+    <Loggers>
+        
+        <logger name="jp.co.jeu.jbatch" level="trace">
+            <AppenderRef ref="console-appender"/>
+            <level value="error">
+                <AppenderRef ref="error-appender"/>
+            </level>
+            <level value="info">
+                <AppenderRef ref="info-appender"/>
+            </level>
+            <level value="debug">
+                <AppenderRef ref="debug-appender"/>
+            </level>
+        </logger>
+        <Root level="trace">
+            <AppenderRef ref="console-appender"/>
+            <AppenderRef ref="info-appender"/>
+            <AppenderRef ref="debug-appender"/>
+            <AppenderRef ref="error-appender"/>
+        </Root>
+    </Loggers>
+</Configuration>

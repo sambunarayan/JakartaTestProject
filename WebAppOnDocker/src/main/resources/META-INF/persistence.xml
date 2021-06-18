@@ -4,5 +4,12 @@
   <persistence-unit name="jp.co.jeu_WebAppOnDocker_war_1.0.0PU" transaction-type="JTA">
     <jta-data-source>payara_test_db</jta-data-source>
     <class>jp.co.jeu.webappondocker.entity.TodoList</class>
+    <properties>
+      <!-- <property name="com.acme.persistence.sql-logging" value="on"/> -->
+      <property name="eclipselink.logging.level.sql" value="FINE"/>
+      <property name="eclipselink.logging.parameters" value="true"/>
+      <!-- <property name="eclipselink.logging.level" value="FINE"/> -->
+      <property name="eclipselink.logging.logger" value="jp.co.jeus.common.lib.logger.EclipseLinkSessionLog" />
+    </properties>
   </persistence-unit>
 </persistence>
