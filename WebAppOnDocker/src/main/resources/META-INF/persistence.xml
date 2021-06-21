@@ -9,7 +9,7 @@
       <property name="eclipselink.logging.level.sql" value="FINE"/>
       <property name="eclipselink.logging.parameters" value="true"/>
       <!-- <property name="eclipselink.logging.level" value="FINE"/> -->
-      <property name="eclipselink.logging.logger" value="jp.co.jeus.common.lib.logger.EclipseLinkSessionLog" />
+      <property name="eclipselink.logging.logger" value="jp.co.jeus.common.lib.logger.EclipseLinkSessionLog"/>
     </properties>
   </persistence-unit>
 </persistence>

@@ -6,8 +6,6 @@
 package jp.co.jeu.webappondocker.entity;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -20,6 +18,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -27,73 +26,110 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "TODO_LIST")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "TodoList.findAll", query = "SELECT t FROM TodoList t"),
-    @NamedQuery(name = "TodoList.findByTodoListId", query = "SELECT t FROM TodoList t WHERE t.todoListId = :todoListId"),
-    @NamedQuery(name = "TodoList.findByTodoName", query = "SELECT t FROM TodoList t WHERE t.todoName = :todoName"),
-    @NamedQuery(name = "TodoList.findByTodoStatus", query = "SELECT t FROM TodoList t WHERE t.todoStatus = :todoStatus"),
-    @NamedQuery(name = "TodoList.findByTodoLimit", query = "SELECT t FROM TodoList t WHERE t.todoLimit = :todoLimit")})
+    @NamedQuery(name = "TodoList.findByTodoId", query = "SELECT t FROM TodoList t WHERE t.todoId = :todoId"),
+    @NamedQuery(name = "TodoList.findByUserName", query = "SELECT t FROM TodoList t WHERE t.userName = :userName"),
+    @NamedQuery(name = "TodoList.findByTitle", query = "SELECT t FROM TodoList t WHERE t.title = :title"),
+    @NamedQuery(name = "TodoList.findByStatus", query = "SELECT t FROM TodoList t WHERE t.status = :status"),
+    @NamedQuery(name = "TodoList.findByFromDate", query = "SELECT t FROM TodoList t WHERE t.fromDate = :fromDate"),
+    @NamedQuery(name = "TodoList.findByLimitDate", query = "SELECT t FROM TodoList t WHERE t.limitDate = :limitDate")})
 public class TodoList implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "TODO_LIST_ID")
-    private BigDecimal todoListId;
-    @Size(max = 60)
-    @Column(name = "TODO_NAME")
-    private String todoName;
-    @Column(name = "TODO_STATUS")
-    private BigInteger todoStatus;
-    @Column(name = "TODO_LIMIT")
+    @Column(name = "TODO_ID")
+    private Long todoId;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 20)
+    @Column(name = "USER_NAME")
+    private String userName;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 100)
+    @Column(name = "TITLE")
+    private String title;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "STATUS")
+    private short status;
+    @Column(name = "FROM_DATE")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date todoLimit;
+    private Date fromDate;
+    @Column(name = "LIMIT_DATE")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date limitDate;
 
     public TodoList() {
     }
 
-    public TodoList(BigDecimal todoListId) {
-        this.todoListId = todoListId;
+    public TodoList(Long todoId) {
+        this.todoId = todoId;
     }
 
-    public BigDecimal getTodoListId() {
-        return todoListId;
+    public TodoList(Long todoId, String userName, String title, short status) {
+        this.todoId = todoId;
+        this.userName = userName;
+        this.title = title;
+        this.status = status;
     }
 
-    public void setTodoListId(BigDecimal todoListId) {
-        this.todoListId = todoListId;
+    public Long getTodoId() {
+        return todoId;
     }
 
-    public String getTodoName() {
-        return todoName;
+    public void setTodoId(Long todoId) {
+        this.todoId = todoId;
     }
 
-    public void setTodoName(String todoName) {
-        this.todoName = todoName;
+    public String getUserName() {
+        return userName;
     }
 
-    public BigInteger getTodoStatus() {
-        return todoStatus;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public void setTodoStatus(BigInteger todoStatus) {
-        this.todoStatus = todoStatus;
+    public String getTitle() {
+        return title;
     }
 
-    public Date getTodoLimit() {
-        return todoLimit;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public void setTodoLimit(Date todoLimit) {
-        this.todoLimit = todoLimit;
+    public short getStatus() {
+        return status;
+    }
+
+    public void setStatus(short status) {
+        this.status = status;
+    }
+
+    public Date getFromDate() {
+        return fromDate;
+    }
+
+    public void setFromDate(Date fromDate) {
+        this.fromDate = fromDate;
+    }
+
+    public Date getLimitDate() {
+        return limitDate;
+    }
+
+    public void setLimitDate(Date limitDate) {
+        this.limitDate = limitDate;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (todoListId != null ? todoListId.hashCode() : 0);
+        hash += (todoId != null ? todoId.hashCode() : 0);
         return hash;
     }
 
@@ -104,7 +140,7 @@ public class TodoList implements Serializable {
             return false;
         }
         TodoList other = (TodoList) object;
-        if ((this.todoListId == null && other.todoListId != null) || (this.todoListId != null && !this.todoListId.equals(other.todoListId))) {
+        if ((this.todoId == null && other.todoId != null) || (this.todoId != null && !this.todoId.equals(other.todoId))) {
             return false;
         }
         return true;
@@ -112,7 +148,7 @@ public class TodoList implements Serializable {
 
     @Override
     public String toString() {
-        return "jp.co.jeu.webappondocker.entity.TodoList[ todoListId=" + todoListId + " ]";
+        return "jp.co.jeu.webappondocker.entity.TodoList[ todoId=" + todoId + " ]";
     }
     
 }
