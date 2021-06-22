@@ -32,17 +32,18 @@ public class ConnectionPoolTestResource {
     public Response respond() {
         try {
             Query query = em.createNamedQuery("TodoList.findAll");
-            query.getResultList();
+            return Response.ok(query.getResultList())
+                    .build();
         } catch (Exception e) {
             return Response
                     .ok(e.getMessage())
                     .build();
         }
 //        Session session = (Session) em.getDelegate();
-        Connection conn = em.unwrap(Connection.class);
+//        Connection conn = em.unwrap(Connection.class);
 //        Connection conn = em.unwrap(Session.class).connection();
-        return Response
-                .ok("success")
-                .build();
+//        return Response
+//                .ok("success")
+//                .build();
     }
 }
