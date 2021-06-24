@@ -20,14 +20,6 @@ public class TodoResource {
     @PersistenceContext(name = "jp.co.jeu_WebAppOnDocker_war_1.0.0PU")
     private EntityManager em;
 
-    @GET
-    public Response ping() {
-        
-        return Response
-                .ok("ping")
-                .build();
-    }
-
     @Path("/find/todo")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
