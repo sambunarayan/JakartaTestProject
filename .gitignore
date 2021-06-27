@@ -7,3 +7,5 @@
 /JakartaEETest/target/
 /*/target/
 *.class
+*.war
+/jeus-common-lib/nbproject/

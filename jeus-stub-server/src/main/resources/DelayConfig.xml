@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<response-setting>
+    <description>Delay system settings</description>
+    <response-data>
+        <data>
+            <key>sleep</key>
+            <value>10000</value>
+        </data>
+    </response-data>
+</response-setting>

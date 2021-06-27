@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>jp.co.jeu</groupId>
+    <groupId>jp.co.jeus</groupId>
     <artifactId>JBatchTest</artifactId>
     <version>1.0.0</version>
     <packaging>war</packaging>
@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <jakartaee>8.0</jakartaee>
-        <jeus-group-id>jp.co.jeu</jeus-group-id>
+        <jeus-group-id>jp.co.jeus</jeus-group-id>
         <jeus-group-version>1.0.0</jeus-group-version>
     </properties>
     

@@ -12,4 +12,9 @@
      WHERE j.id = :id
     ]]></query>
   </named-query>
+  <named-native-query name="JBatchTest.updateName">
+      <query><![CDATA[
+     UPDATE JBATCH_TEST SET NAME = ? WHERE ID = ?
+    ]]></query>
+  </named-native-query>
 </entity-mappings>

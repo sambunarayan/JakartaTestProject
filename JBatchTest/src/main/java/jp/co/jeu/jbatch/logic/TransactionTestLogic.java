@@ -5,50 +5,29 @@
  */
 package jp.co.jeu.jbatch.logic;
 
-import java.math.BigDecimal;
-import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
+import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import javax.transaction.Transactional;
-import jp.co.jeu.jbatch.entity.JbatchTest;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import jp.co.jeu.jbatch.dao.TransactionTestDao;
+import jp.co.jeu.jbatch.exception.JeusRunTimeException;
 
 /**
  *
  * @author soyou
  */
-@Stateless
+@Dependent
+@Transactional
 public class TransactionTestLogic {
 
-    Logger logger = LogManager.getLogger(this.getClass().getSimpleName());
     @Inject
-    private EntityManager em;
+    private TransactionTestDao dao;
 
-    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-    @Transactional(rollbackOn = RuntimeException.class)
-    public void execute() {
-        int id = (int) (Math.random() * 100000);
-        logger.info("execute start");
-        JbatchTest testEntity = new JbatchTest();
-        testEntity.setId(BigDecimal.valueOf(id));
-        testEntity.setName("Test " + testEntity.getName());
-        logger.info("persiste : " + testEntity.getId());
-        em.persist(testEntity);
-
-        if (testEntity.getId() == BigDecimal.valueOf(3)) {
-            throw new RuntimeException();
+    @Transactional(rollbackOn = {JeusRunTimeException.class, Exception.class})
+    public void exec(long id) {
+        String name = "Tx" + ((int) (Math.random() * 100));
+        dao.updateName(id, name);
+        if (id == 46943) {
+            throw new JeusRunTimeException();
         }
-    }
-
-    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-    @Transactional(rollbackOn = RuntimeException.class)
-    public int update(int id) {
-        Query query = em.createNamedQuery("JbatchTest.updateByKey");
-        query.setParameter("id", id);
-        return query.executeUpdate();
     }
 }

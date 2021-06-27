@@ -3,12 +3,17 @@
     <description>batch system settings</description>
     <settings>
         <setting>
-            <key>URL</key>
-            <value>http://localhost/stub/</value>
+            <key>STUB_URL</key>
+            <!-- <value>http://localhost:8080/jeus-stub-server/stub</value> -->
+            <value>http://192.168.99.100:8082/jeus-stub-server-1.0.0/stub</value>
         </setting>
         <setting>
-            <key>TIMEOUT</key>
-            <value>5</value>
+            <key>REST_CONNECT_TIMEOUT</key>
+            <value>15000</value>
+        </setting>
+        <setting>
+            <key>REST_READ_TIMEOUT</key>
+            <value>15000</value>
         </setting>
     </settings>
 </batch-settings>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<system-setting>
+    <environment>LOCAL</environment>
+    <description>For local environment system settings.</description>
+    <settings>
+        <setting>
+            <key>RESPONSE_TIMEOUT_MILLISECOND</key>
+            <value>10000</value>
+        </setting>
+        <setting>
+            <key>TIMEOUT_SERVER_URL</key>
+            <value>http://localhost:8080/jeus-stub-server/stub</value>
+        </setting>
+    </settings>
+</system-setting>

@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>jp.co.jeu</groupId>
+    <groupId>jp.co.jeus</groupId>
     <artifactId>WebAppOnDocker</artifactId>
     <version>1.0.0</version>
     <packaging>war</packaging>
-    <name>WebAppOnDocker-1.0.0</name>
+    <name>WebAppOnDocker</name>
     
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -14,7 +14,48 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <jakartaee>8.0</jakartaee>
+        <jeus-group>jp.co.jeus</jeus-group>
+        <jeus-version>1.0.0</jeus-version>
     </properties>
+    
+    <profiles>
+        <profile>
+            <id>local</id>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+        <profile>
+            <id>integration</id> <!-- for docker -->
+            <build>
+                <resources>
+                    <resource> <!-- This line takes precedence -->
+                        <directory>src/main/resources.integration</directory>
+                    </resource>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+        <profile>
+            <id>production</id>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources.production</directory>
+                    </resource>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+    </profiles>
     
     <dependencies>
         <dependency>
@@ -58,9 +99,19 @@
             <version>${jakartaee}</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>${jeus-group}</groupId>
+            <artifactId>jeus-common-lib</artifactId>
+            <version>${jeus-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.7</version>
+        </dependency>
     </dependencies>
     
-     <build>
+    <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

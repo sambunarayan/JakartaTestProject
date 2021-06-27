@@ -12,7 +12,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import jp.co.jeu.jbatch.annotation.TraceLogger;
 import jp.co.jeu.jbatch.beans.MyInterface;
-import jp.co.jeu.jbatch.logic.TransactionTestLogic;
+import jp.co.jeu.jbatch.logic.EJBTransactionTestLogic;
 import jp.co.jeu.jbatch.system.SystemSettingsManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -30,7 +30,7 @@ public class JBatchResource {
     @Inject
     private MyInterface myInter;
     @Inject
-    private TransactionTestLogic txLogic;
+    private EJBTransactionTestLogic txLogic;
     
     @GET
     @Path("/jbatch")
@@ -39,7 +39,6 @@ public class JBatchResource {
     public Response ping() {
         // Xml
 //        XmlReader xmlReader =  new XmlReader();
-
         logger.info(SystemSettingsManager.get("URL"));
         System.setProperty("serviceName", "JBatchTest");
         // ジョブの起動
@@ -85,5 +84,4 @@ public class JBatchResource {
                 .ok()
                 .build();
     }
-    
 }
