@@ -13,6 +13,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import jp.co.jeu.webappondocker.dto.TodoListFindAllDto;
 import jp.co.jeu.webappondocker.dto.TodoSearchRequestDto;
 import jp.co.jeu.webappondocker.entity.TodoList;
 import jp.co.jeu.webappondocker.logic.TodoSearchLogic;
@@ -23,20 +24,21 @@ import jp.co.jeu.webappondocker.logic.TodoSearchLogic;
  */
 @Path("todo")
 public class TodoResource {
-
+    
     @Inject
     private TodoSearchLogic searchLogic;
-
+    
     @Path("/findAll")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response findTodo() {
-        List list = searchLogic.findAll();
+        TodoListFindAllDto resEntity = searchLogic.findAll();
         return Response
-                .ok(list)
+                .ok()
+                .entity(resEntity)
                 .build();
     }
-
+    
     @Path("/findByKey")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)

@@ -9,6 +9,7 @@ import java.util.List;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import jp.co.jeu.webappondocker.dao.TodoDao;
+import jp.co.jeu.webappondocker.dto.TodoListFindAllDto;
 import jp.co.jeu.webappondocker.dto.TodoSearchRequestDto;
 import jp.co.jeu.webappondocker.entity.TodoList;
 
@@ -22,8 +23,10 @@ public class TodoSearchLogic {
     @Inject
     private TodoDao todoDao;
 
-    public List<TodoList> findAll() {
-        return todoDao.findAll();
+    public TodoListFindAllDto findAll() {
+        TodoListFindAllDto findAllDto = new TodoListFindAllDto();
+        findAllDto.setFindAll(todoDao.findAll());
+        return findAllDto;
     }
 
     public TodoList findTodoByKey(TodoSearchRequestDto reqDto) {

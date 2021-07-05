@@ -8,9 +8,11 @@ package jp.co.jeu.webappondocker.dao;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.enterprise.context.Dependent;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
+import jp.co.jeu.webappondocker.dto.TodoListDto;
 import jp.co.jeu.webappondocker.dto.TodoSearchRequestDto;
 import jp.co.jeu.webappondocker.entity.TodoList;
 import org.eclipse.persistence.internal.jpa.EJBQueryImpl;
@@ -23,16 +25,20 @@ import org.eclipse.persistence.internal.jpa.EJBQueryImpl;
 @Dependent
 public class TodoDao extends AbstractWebAppDao {
 
-    public List<TodoList> findAll() {
+    public List<TodoListDto> findAll() {
         Query query = getEntityManager().createNamedQuery("TodoList.findAll");
-        return new ArrayList<>();
-//        return query.getResultList()
-//                .stream()
-//                .map(o -> {
-//                    TodoList todo = new TodoList();
-//
-//                    return todo;
-//                }).collect(Collectors.toList());
+        return (List<TodoListDto>) query.getResultStream()
+                .map(o -> {
+                    TodoList entity = (TodoList) o;
+                    TodoListDto todo = new TodoListDto();
+                    todo.setTodoId(entity.getTodoId().toString());
+                    todo.setUserName(entity.getUserName());
+                    todo.setTitle(entity.getTitle());
+                    todo.setStatus(String.valueOf(entity.getStatus()));
+                    todo.setFromDate(entity.getFromDate().toString());
+                    todo.setLimitDate(entity.getLimitDate().toString());
+                    return todo;
+                }).collect(Collectors.toList());
     }
 
     public TodoList findTodoByKey(TodoSearchRequestDto reqDto) {

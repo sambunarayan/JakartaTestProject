@@ -15,32 +15,32 @@ import java.util.Date;
 public class TodoListDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private Long todoId;
+    private String todoId;
     private String userName;
     private String title;
-    private short status;
-    private Date fromDate;
-    private Date limitDate;
+    private String status;
+    private String fromDate;
+    private String limitDate;
 
     public TodoListDto() {
     }
 
-    public TodoListDto(Long todoId) {
+    public TodoListDto(String todoId) {
         this.todoId = todoId;
     }
 
-    public TodoListDto(Long todoId, String userName, String title, short status) {
+    public TodoListDto(String todoId, String userName, String title, String status) {
         this.todoId = todoId;
         this.userName = userName;
         this.title = title;
         this.status = status;
     }
 
-    public Long getTodoId() {
+    public String getTodoId() {
         return todoId;
     }
 
-    public void setTodoId(Long todoId) {
+    public void setTodoId(String todoId) {
         this.todoId = todoId;
     }
 
@@ -60,27 +60,27 @@ public class TodoListDto implements Serializable {
         this.title = title;
     }
 
-    public short getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(short status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public Date getFromDate() {
+    public String getFromDate() {
         return fromDate;
     }
 
-    public void setFromDate(Date fromDate) {
+    public void setFromDate(String fromDate) {
         this.fromDate = fromDate;
     }
 
-    public Date getLimitDate() {
+    public String getLimitDate() {
         return limitDate;
     }
 
-    public void setLimitDate(Date limitDate) {
+    public void setLimitDate(String limitDate) {
         this.limitDate = limitDate;
     }
 }
