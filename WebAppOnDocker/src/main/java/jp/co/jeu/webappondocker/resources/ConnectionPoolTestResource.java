@@ -5,14 +5,14 @@
  */
 package jp.co.jeu.webappondocker.resources;
 
-import java.sql.Connection;
 import javax.enterprise.context.RequestScoped;
-import javax.jms.Session;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
@@ -29,6 +29,7 @@ public class ConnectionPoolTestResource {
 //    @Resource(mappedName = "jdbc:/payara_test_db")
 //    private DataSource datasource;
     @GET
+    @Produces(MediaType.APPLICATION_JSON)
     public Response respond() {
         try {
             Query query = em.createNamedQuery("TodoList.findAll");

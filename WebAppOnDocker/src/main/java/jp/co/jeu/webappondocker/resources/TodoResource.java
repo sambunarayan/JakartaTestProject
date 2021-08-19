@@ -1,35 +1,53 @@
 package jp.co.jeu.webappondocker.resources;
 
+import com.google.gson.Gson;
 import java.util.List;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import jp.co.jeu.webappondocker.dto.TodoListFindAllDto;
+import jp.co.jeu.webappondocker.dto.TodoSearchRequestDto;
+import jp.co.jeu.webappondocker.entity.TodoList;
+import jp.co.jeu.webappondocker.logic.TodoSearchLogic;
 
 /**
  *
  * @author
  */
-@Path("javaee8")
+@Path("todo")
 public class TodoResource {
-
-    @PersistenceContext(name = "jp.co.jeu_WebAppOnDocker_war_1.0.0PU")
-    private EntityManager em;
-
-    @Path("/find/todo")
+    
+    @Inject
+    private TodoSearchLogic searchLogic;
+    
+    @Path("/findAll")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response findTodo() {
-
-        Query query = em.createNamedQuery("TodoList.findAll");
-        List list = query.getResultList();
-
+        TodoListFindAllDto resEntity = searchLogic.findAll();
         return Response
-                .ok(list)
+                .ok()
+                .entity(resEntity)
+                .build();
+    }
+    
+    @Path("/findByKey")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response findTodoByKey(TodoSearchRequestDto reqDto) {
+        TodoList todoList = searchLogic.findTodoByKey(reqDto);
+        return Response
+                .ok()
+                .entity(todoList)
                 .build();
     }
 }

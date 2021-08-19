@@ -10,7 +10,6 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  *
@@ -45,5 +44,4 @@ public class StringUtilityTest {
         String json = "{\"i_d\":\"a_b-c\",\"a~ge\":\"2#2\",\"customInfo\":{\"addr\":\"fukuoka\",\"tel\":\"080\"}}";
         String result = StringUtility.toMaskedJson(json);
     }
-
 }
